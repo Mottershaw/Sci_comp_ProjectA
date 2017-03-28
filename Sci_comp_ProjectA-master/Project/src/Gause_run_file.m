@@ -14,10 +14,9 @@ by=-pi;
 
 %% Boundry equasions 
 
-
 %% The boundry 
 n=8;
-m=9;
+m=n;
 Do=zeros(n,m);
 
 %Top
@@ -33,13 +32,24 @@ Do=zeros(n,m);
      %Do(:,1)=5;
 %left hand verical
     g=Do(n,end);
-    f=Do(1,end);
-    Do(:,m)=g+(y-ay)/(by-ay)*(f-g);
+    r=Do(1,end);
+    Do(:,m)=g+(y-ay)/(by-ay)*(r-g);
 Do_boundary=Do; 
-%% So we are going to try and solve this
+%% So I are going to try and solve this
+r=single(zeros((m*n),1));
 
-Sol_D0=G_solve(Do)
+dx=1/(n-1);
+dy=1/(m-1);
 
-surf(Sol_D0)
-    
+for i=1:m-1
+      for j=1:n-1
+        X=dx*i;
+        Y=dy*j;
+        r(i*j)=sin(pi*(X-ax)/(bx-ax))*cos(pi/2*(2*(Y-ay)/(by-ay)+1)); 
+      end
+end
+
+f=ones(1,n)
+e=ones
+%U=Tridiag(
 
