@@ -8,6 +8,8 @@
 # Log file
 *.log
 
+# Google drive file
+
 # BlueJ files
 *.ctxt
 
