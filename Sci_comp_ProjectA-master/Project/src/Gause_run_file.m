@@ -1,6 +1,7 @@
 %% Created by Grant Mottershaw
 % 3/19/2017
 clear
+clc
 %% this is where the code starts
 
 % Defining the domain of intrest
@@ -15,8 +16,8 @@ by=-pi;
 
 
 %% The boundry 
-n=5;
-m=15;
+n=8;
+m=9;
 Do=zeros(n,m);
 
 %Top
@@ -34,8 +35,11 @@ Do=zeros(n,m);
     g=Do(n,end);
     f=Do(1,end);
     Do(:,m)=g+(y-ay)/(by-ay)*(f-g);
+Do_boundary=Do; 
+%% So we are going to try and solve this
+
+Sol_D0=G_solve(Do)
+
+surf(Sol_D0)
     
-%% So we are going to try and solve thsi 
-    
-    
-    
+
