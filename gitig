@@ -9,6 +9,7 @@
 *.log
 
 # Google drive file
+*.exe
 
 # BlueJ files
 *.ctxt
