@@ -2,32 +2,43 @@
 % 3/19/2017
 clear
 clc
+%% this is where the code starts
+
 %% Defining the domain of intrest
-% X Boundarys  
+
 ax=pi;
 bx=-pi;
-% Y Boundarys 
+
 ay=pi;
 by=-pi;
+
 %% The boundry 
-n=40;
+n=15;
 m=n;
-Do=ones(n,m)*0.00001;
+Do=zeros(n,m);
+
 %Top
     x=pi:-(2*pi/(m-1)):-pi;
     Do(1,:)=x.*(x-ax).^2;   
 %Bottom
     Do(n,:)=(x-ax).^2.*cos((pi.*x)./ax);
+
 %Left hand vertical
      y=pi:-(2*pi/(n-1)):-pi;
+     
+     %Do(:,1)=5;
 %left hand verical
     g=Do(n,end);
     f=Do(1,end);
     Do(:,m)=g+(y-ay)/(by-ay)*(f-g);
 u=Do;
 figure(1)
-surf(x,y,u,'EdgeColor','none')
-%% the solve
+surf(x,y,u)
+%% So we are going to try and solve this
+
+dx=1/(n-1);
+dy=dx;
+
 F=zeros(n);
 %% The function we have to have at every point 
 for i=2:1:n-1
@@ -36,35 +47,22 @@ for i=2:1:n-1
         end
 end
 %% solving the PDE
-lamda=0; % to stop the while loop
+safe=0;
+error=0;
 
-% These are used to help count the error for each cycle. 
-u1=0;
-u2=0;
+for a=1:7
 
-lamda=1;
-
-error=100; % Becasue we have not solved it yet the Error is a baseline of 100%
-while error > 0.1 
-    lamda=lamda+0.01;
-    if lamda == 2 % Makes sure that the Program doesn't run too long 
-        break;
-    end 
-    u1=u; % the value before they run though the system 
     for i=2:1:n-1
         for j=2:1:m-1
             u(i,j)=1/4*(u(i+1,j)+u(i-1,j)+u(i,j+1)+u(i,j+1))+F(i,j);
-            % The diagonals on the square around the point 
-            u(i,j)=1/4*(u(i+1,j+1)+u(i+1,j-1)+u(i-1,j+1)+u(i-1,j+1))+F(i,j);     
+            u(i,j)=1/4*(u(i+1,j+1)+u(i+1,j-1)+u(i-1,j+1)+u(i-1,j+1));
         end
     end
-u2=u;   % the values after they are calclated. 
-error=max(max(abs((u1-u2)./u2)))*100;
-
 end
-%% The Results 
     
-error=max(max(abs((u1-u2)./u2)))*100
-count=(lamda-1)*1000
+error=u-
+
 figure(2)
 surf(x,y,u,'EdgeColor','none')
+
+

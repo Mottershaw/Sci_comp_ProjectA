@@ -61,6 +61,7 @@ while error > 0.1
 u2=u;   % the values after they are calclated. 
 error=max(max(abs((u1-u2)./u2)))*100;
 
+u=u2*lamda+(1-lamda)*u1;
 end
 %% The Results 
     
@@ -68,3 +69,4 @@ error=max(max(abs((u1-u2)./u2)))*100
 count=(lamda-1)*1000
 figure(2)
 surf(x,y,u,'EdgeColor','none')
+
