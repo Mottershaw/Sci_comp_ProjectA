@@ -13,7 +13,7 @@ ay=pi;
 by=-pi;
 
 %% The boundry 
-n=10;
+n=19;
 m=n;
 Do=zeros(n,m);
 
@@ -32,6 +32,7 @@ Do=zeros(n,m);
     f=Do(1,end);
     Do(:,m)=g+(y-ay)/(by-ay)*(f-g);
 u=Do;
+figure(1)
 surf(u)
 %% So we are going to try and solve this
 
@@ -44,17 +45,22 @@ dy=dx;
 
 r=zeros(1,n^2);
 
-
-
-for j=n-1:-1:2
-    for k=2:1:m-1
-        F=sin((pi*(x(j)-ax)/(bx-ax)))*cos((pi/2)*(2*(y(m)-ay)/(by-ay)-1));
-        U(j,k)=1/4*(u(j-1,k)-u(j+1,k)+u(j,k-1)+u(j,k+1)+F);
+ for i=2:1:n-1
+        for j=2:1:m-1
+            F(i,j)=sin(i);
+        end
     end
-end
 
+%for a=1:9
+    for i=2:1:n-1
+        for j=2:1:m-1
+            u(i,j)=1/4*u(i+1,j)+u(i-1,j)+u(i,j+1)+u(i,j+1)+F(i,j);
+        end
+    end
+%end
 
-surf(U)
+figure(2)
+surf(u)
 
 %% assenbley in to graphable plot. 
 
