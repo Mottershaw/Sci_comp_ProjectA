@@ -1,7 +1,9 @@
-%% Created by Grant Mottershaw
-% 3/19/2017
-clear
-clc
+function [ u,count_gause,error ] = Gause( max_error,nodes )
+%This will slove the APc2-2 for using Gause approximatio 
+%   Gause will return the solution
+% error is the ammount of error that you want
+% nodes how fine you want the mesh for the square we are looking at
+
 %% Defining the domain of intrest
 % X Boundarys  
 ax=pi;
@@ -10,7 +12,7 @@ bx=-pi;
 ay=pi;
 by=-pi;
 %% The boundry 
-n=100;
+n=nodes;
 m=n;
 %Domain 
 Do=ones(n,m)*0.00001;
@@ -31,7 +33,7 @@ y=pi:-(2*pi/(n-1)):-pi;
    % Neuman boundary Condition
 u=Do;
 figure(1)
-surf(x,y,u,'EdgeColor','none')
+%surf(x,y,u,'EdgeColor','none')
 %% the solve
 F=zeros(n);
 %% The function we have to have at every point 
@@ -50,7 +52,7 @@ u2=0;
 lamda=1;
 
 error=100; % Becasue we have not solved it yet the Error is a baseline of 100%
-while error > 0.1 
+while error > max_error
     lamda=lamda+0.1;
     if lamda == 2 % Makes sure that the Program doesn't run too long 
         break;
@@ -60,7 +62,7 @@ while error > 0.1
         for j=2:1:m-1
             u(i,j)=1/4*(u(i+1,j)+u(i-1,j)+u(i,j+1)+u(i,j+1)+F(i,j));
             % The diagonals on the square around the point 
-            u(i,j)=1/4*(u(i+1,j+1)+u(i+1,j-1)+u(i-1,j+1)+u(i-1,j+1)+F(i,j));     
+           % u(i,j)=1/4*(u(i+1,j+1)+u(i+1,j-1)+u(i-1,j+1)+u(i-1,j+1)+F(i,j));     
         end
     end
 u2=u;   % the values after they are calclated. 
@@ -69,7 +71,10 @@ error=max(max(abs((u1-u2)./u2)))*100;
 end
 %% The Results 
     
-error=max(max(abs((u1-u2)./u2)))*100
-count=(lamda-1)*1000
+error=max(max(abs((u1-u2)./u2)))*100;
+count_gause=(lamda-1)*1000;
 figure(2)
 surf(x,y,u,'EdgeColor','none')
+
+end
+

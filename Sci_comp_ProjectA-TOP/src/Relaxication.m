@@ -10,20 +10,25 @@ bx=-pi;
 ay=pi;
 by=-pi;
 %% The boundry 
-n=40;
+n=100;
 m=n;
+%Domain 
 Do=ones(n,m)*0.00001;
-%Top
-    x=pi:-(2*pi/(m-1)):-pi;
-    Do(1,:)=x.*(x-ax).^2;   
+x=pi:-(2*pi/(m-1)):-pi;
+y=pi:-(2*pi/(n-1)):-pi;
+% TOP 
+    g=x.*(x-ax).^2;
+    Do(1,:)=g;   
 %Bottom
-    Do(n,:)=(x-ax).^2.*cos((pi.*x)./ax);
-%Left hand vertical
-     y=pi:-(2*pi/(n-1)):-pi;
+    f=(x-ax).^2.*cos((pi.*x)./ax);
+    Do(n,:)=f;
+   
+%Right hand vertical
+%     g=Do(n,end);
+%     f=Do(1,end);
+    Do(:,m)=g+(y-ay)/(by-ay).*(f-g);
 %left hand verical
-    g=Do(n,end);
-    f=Do(1,end);
-    Do(:,m)=g+(y-ay)/(by-ay)*(f-g);
+   % Neuman boundary Condition
 u=Do;
 figure(1)
 surf(x,y,u,'EdgeColor','none')
@@ -46,7 +51,7 @@ lamda=1;
 
 error=100; % Becasue we have not solved it yet the Error is a baseline of 100%
 while error > 0.1 
-    lamda=lamda+0.01;
+    lamda=lamda+0.001;
     if lamda == 2 % Makes sure that the Program doesn't run too long 
         break;
     end 
