@@ -10,7 +10,7 @@ bx=-pi;
 ay=pi;
 by=-pi;
 %% The boundry 
-n=100;
+n=200;
 m=n;
 %Domain 
 Do=ones(n,m)*0.00001;
@@ -51,21 +51,24 @@ lamda=1;
 
 error=100; % Becasue we have not solved it yet the Error is a baseline of 100%
 while error > 0.1 
-    lamda=lamda+0.1;
+    lamda=lamda+0.001;
     if lamda == 2 % Makes sure that the Program doesn't run too long 
         break;
     end 
     u1=u; % the value before they run though the system 
     for i=2:1:n-1
         for j=2:1:m-1
-            u(i,j)=1/4*(u(i+1,j)+u(i-1,j)+u(i,j+1)+u(i,j+1)+F(i,j));
+           u(i,j)=1/4*(u(i+1,j)+u(i-1,j)+u(i,j+1)+u(i,j+1)+F(i,j));
             % The diagonals on the square around the point 
-            u(i,j)=1/4*(u(i+1,j+1)+u(i+1,j-1)+u(i-1,j+1)+u(i-1,j+1)+F(i,j));     
+            u(i,j)=1/4*(u(i+1,j+1)+u(i+1,j-1)+u(i-1,j+1)+u(i-1,j+1))+F(i,j);     
         end
     end
 u2=u;   % the values after they are calclated. 
+
+
 error=max(max(abs((u1-u2)./u2)))*100;
 
+%u=u2*lamda+(1-lamda)*u1;
 end
 %% The Results 
     

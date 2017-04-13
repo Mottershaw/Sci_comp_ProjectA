@@ -62,7 +62,7 @@ while error > max_error
         for j=2:1:m-1
             u(i,j)=1/4*(u(i+1,j)+u(i-1,j)+u(i,j+1)+u(i,j+1)+F(i,j));
             % The diagonals on the square around the point 
-           % u(i,j)=1/4*(u(i+1,j+1)+u(i+1,j-1)+u(i-1,j+1)+u(i-1,j+1)+F(i,j));     
+            u(i,j)=1/4*(u(i+1,j+1)+u(i+1,j-1)+u(i-1,j+1)+u(i-1,j+1)+F(i,j));     
         end
     end
 u2=u;   % the values after they are calclated. 

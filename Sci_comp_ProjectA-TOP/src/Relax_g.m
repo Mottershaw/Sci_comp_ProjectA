@@ -1,4 +1,4 @@
-function [ u,count_lamda,error,lamda ] = Relax_g( max_error,nodes )
+function [ u,count,error,lamda ] = Relax_g( max_error,nodes )
 %This will slove the APc2-2 for using Gause approximatio 
 %   Gause will return the solution
 % error is the ammount of error that you want
@@ -45,39 +45,53 @@ for i=2:1:n-1
         end
 end
 %% solving the PDE
-lamda=0; % to stop the while loop
+
 
 % These are used to help count the error for each cycle. 
 u1=0;
 u2=0;
 
-lamda=1.1;
+
 
 error=100; % Becasue we have not solved it yet the Error is a baseline of 100%
-while error > max_error
-    %lamda=lamda+0.001;
-    if lamda == 2 % Makes sure that the Program doesn't run too long 
-        break;
-    end 
+lamda=1.1;
+count=0;
+error=100; % Becasue we have not solved it yet the Error is a baseline of 100%
+
+% It will solve untill the error Max error is below the specified value. 
+
+while error > max_error 
+    
+    lamda=lamda+0.0035;
+   
     u1=u; % the value before they run though the system 
     for i=2:1:n-1
         for j=2:1:m-1
-            u(i,j)=1/4*(u(i+1,j)+u(i-1,j)+u(i,j+1)+u(i,j+1))+F(i,j);
+            u(i,j)=1/4*(u(i+1,j)+u(i-1,j)+u(i,j+1)+u(i,j+1)+F(i,j));
             % The diagonals on the square around the point 
-            %u(i,j)=1/4*(u(i+1,j+1)+u(i+1,j-1)+u(i-1,j+1)+u(i-1,j+1))+F(i,j);     
+            u(i,j)=1/4*(u(i+1,j+1)+u(i+1,j-1)+u(i-1,j+1)+u(i-1,j+1))+F(i,j);     
         end
     end
 u2=u;   % the values after they are calclated. 
+
 error=max(max(abs((u1-u2)./u2)))*100;
 
 u=u2*lamda+(1-lamda)*u1;
+
+count=count+1;
+
+if count== 2000 % To break the for while loop A.K.A. the safty net
+    break
+end
+
 end
 %% The Results 
     
-error=max(max(abs((u1-u2)./u2)))*100;
-count_lamda=(lamda-1)*1000;
-figure(1)
-surf(x,y,u,'EdgeColor','none')
+error=max(max(abs((u1-u2)./u2)))*100
+count;
+%count=(lamda-1)*1000;
+% figure(2)
+% surf(x,y,u,'EdgeColor','none')
 
 end
 
