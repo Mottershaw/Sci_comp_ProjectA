@@ -1,11 +1,16 @@
-function [ u,count,error,lamda ] = Relax_g( max_error,nodes )
+function [ u,count,error,lamda ] = Relax_g( max_error,nodes,lamda_Start )
 %This will slove the APc2-2 for using Gause approximatio 
-%   Gause will return the solution
-% error is the ammount of error that you want
-% nodes how fine you want the mesh for the square we are looking at
+%   Relax_g will return the solution
 
+%% Inputs 
+% error == the ammount of error that you want
+% nodes == how fine you want the mesh for the square we are looking at
+% lamda_Start == were you want the relaxation to start at. 
 
-
+%% Outputs
+% u == solution 
+% Count == how many cycle the solution took to solve
+% lamda == the Final Lamda for the solution 
 %% Defining the domain of intrest
 % X Boundarys  
 ax=pi;
@@ -26,7 +31,6 @@ y=pi:-(2*pi/(n-1)):-pi;
 %Bottom
     f=(x-ax).^2.*cos((pi.*x)./ax);
     Do(n,:)=f;
-   
 %Right hand vertical
 %     g=Do(n,end);
 %     f=Do(1,end);
@@ -46,30 +50,30 @@ for i=2:1:n-1
 end
 %% solving the PDE
 
-
 % These are used to help count the error for each cycle. 
 u1=0;
 u2=0;
-
-
-
-error=100; % Becasue we have not solved it yet the Error is a baseline of 100%
-lamda=1.1;
+% Where we start counting with Lamda
+lamda=lamda_Start;
+% The scaling ammount for how lamda is helped 
+L_add=1/sqrt(nodes);
 count=0;
 error=100; % Becasue we have not solved it yet the Error is a baseline of 100%
 
 % It will solve untill the error Max error is below the specified value. 
 
-while error > max_error 
+while error > max_error
     
-    lamda=lamda+0.0035;
-   
+    %% When we 
+    if count == nodes*0.1 
+        lamda=lamda+L_add;
+    end
     u1=u; % the value before they run though the system 
     for i=2:1:n-1
         for j=2:1:m-1
-            u(i,j)=1/4*(u(i+1,j)+u(i-1,j)+u(i,j+1)+u(i,j+1)+F(i,j));
+           u(i,j)=0.25*(u(i+1,j)+u(i-1,j)+u(i,j+1)+u(i,j+1)+F(i,j));
             % The diagonals on the square around the point 
-            u(i,j)=1/4*(u(i+1,j+1)+u(i+1,j-1)+u(i-1,j+1)+u(i-1,j+1))+F(i,j);     
+           % u(i,j)=0.25*(u(i+1,j+1)+u(i+1,j-1)+u(i-1,j+1)+u(i-1,j+1))+F(i,j);     
         end
     end
 u2=u;   % the values after they are calclated. 
@@ -80,14 +84,12 @@ u=u2*lamda+(1-lamda)*u1;
 
 count=count+1;
 
-if count== 2000 % To break the for while loop A.K.A. the safty net
+if count== 3000 | lamda == 2
     break
-end
-
 end
 %% The Results 
     
-error=max(max(abs((u1-u2)./u2)))*100
+error=max(max(abs((u1-u2)./u2)))*100;
 count;
 %count=(lamda-1)*1000;
 % figure(2)
