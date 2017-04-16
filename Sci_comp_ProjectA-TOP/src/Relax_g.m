@@ -64,16 +64,21 @@ error=100; % Becasue we have not solved it yet the Error is a baseline of 100%
 
 while error > max_error
     
-    %% When we 
-    if count == nodes*0.1 
+    %% Flow controll for adjusting Lamda 
+    if (count == nodes*0.25) && (lamda < 2) % Makes sure that Lamda is less then 2 perconditions 
         lamda=lamda+L_add;
+    elseif count == nodes*0.5
+         lamda=lamda+2*L_add;
+    elseif count == nodes*0.75 
+         lamda=lamda+4*L_add;
     end
+    %% Solving for U matrix 
     u1=u; % the value before they run though the system 
     for i=2:1:n-1
         for j=2:1:m-1
            u(i,j)=0.25*(u(i+1,j)+u(i-1,j)+u(i,j+1)+u(i,j+1)+F(i,j));
             % The diagonals on the square around the point 
-           % u(i,j)=0.25*(u(i+1,j+1)+u(i+1,j-1)+u(i-1,j+1)+u(i-1,j+1))+F(i,j);     
+           u(i,j)=0.25*(u(i+1,j+1)+u(i+1,j-1)+u(i-1,j+1)+u(i-1,j+1))+F(i,j);     
         end
     end
 u2=u;   % the values after they are calclated. 
