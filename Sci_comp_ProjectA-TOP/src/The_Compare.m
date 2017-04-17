@@ -6,7 +6,7 @@
 clear
 clc
 %% Imput and Bounds
-nodes=200;
+nodes=100;
 Max_error=0.001;
 
 x=pi:-(2*pi/(nodes-1)):-pi;
@@ -16,7 +16,7 @@ Lambda_g_in=1;
 [uG,countG,errorG]=Relax_g(Max_error,nodes,Lambda_g_in);
 
 %% The Relaxation Approximation
-Lambda=1.4;
+Lambda=1.3;
 [uR,countR,errorR,lamdaR]=Relax_g(Max_error,nodes,Lambda);
 
 %% Making the table so we can adjust

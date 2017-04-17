@@ -1,0 +1,54 @@
+Host Name:                 DESKTOP-31PD2UB
+OS Name:                   Microsoft Windows 10 Pro
+OS Version:                10.0.14393 N/A Build 14393
+OS Manufacturer:           Microsoft Corporation
+OS Configuration:          Standalone Workstation
+OS Build Type:             Multiprocessor Free
+Registered Owner:          N/A
+Registered Organization:   N/A
+Product ID:                00330-50309-59306-AAOEM
+Original Install Date:     11/29/2016, 9:57:25 AM
+System Boot Time:          4/17/2017, 10:28:03 AM
+System Manufacturer:       Alienware
+System Model:              Alienware 13 R2
+System Type:               x64-based PC
+Processor(s):              1 Processor(s) Installed.
+                           [01]: Intel64 Family 6 Model 78 Stepping 3 GenuineIntel ~2492 Mhz
+BIOS Version:              Alienware 1.3.9, 9/30/2016
+Windows Directory:         C:\Windows
+System Directory:          C:\Windows\system32
+Boot Device:               \Device\HarddiskVolume1
+System Locale:             en-us;English (United States)
+Input Locale:              en-us;English (United States)
+Time Zone:                 (UTC-06:00) Central Time (US & Canada)
+Total Physical Memory:     16,284 MB
+Available Physical Memory: 10,708 MB
+Virtual Memory: Max Size:  18,716 MB
+Virtual Memory: Available: 12,393 MB
+Virtual Memory: In Use:    6,323 MB
+Page File Location(s):     C:\pagefile.sys
+Domain:                    WORKGROUP
+Logon Server:              \\DESKTOP-31PD2UB
+Hotfix(s):                 7 Hotfix(s) Installed.
+                           [01]: KB3150513
+                           [02]: KB3199986
+                           [03]: KB3211320
+                           [04]: KB4013418
+                           [05]: KB4014329
+                           [06]: KB4018483
+                           [07]: KB4015217
+Network Card(s):           2 NIC(s) Installed.
+                           [01]: Killer Wireless-n/a/ac 1535 Wireless Network Adapter
+                                 Connection Name: Wi-Fi
+                                 DHCP Enabled:    Yes
+                                 DHCP Server:     172.21.12.17
+                                 IP address(es)
+                                 [01]: 172.25.176.144
+                                 [02]: fe80::11ae:ff1e:e21e:be3
+                           [02]: Killer E2400 Gigabit Ethernet Controller
+                                 Connection Name: Ethernet
+                                 Status:          Media disconnected
+Hyper-V Requirements:      VM Monitor Mode Extensions: Yes
+                           Virtualization Enabled In Firmware: Yes
+                           Second Level Address Translation: Yes
+                           Data Execution Prevention Available: Yes
