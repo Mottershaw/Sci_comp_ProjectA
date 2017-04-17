@@ -14,8 +14,10 @@ n=nodes;
 m=n;
 %Domain 
 Do=ones(n,m)*0.00001;
-x=pi:-(2*pi/(m-1)):-pi;
-y=pi:-(2*pi/(n-1)):-pi;
+
+dx=(2*pi/(m-1));
+x=pi:-(dx):-pi;
+y=pi:-(dx):-pi;
 % TOP 
     g=x.*(x-ax).^2;
     Do(1,:)=g;   
@@ -29,6 +31,9 @@ y=pi:-(2*pi/(n-1)):-pi;
     Do(:,m)=g+(y-ay)/(by-ay).*(f-g);
 %left hand verical
    % Neuman boundary Condition
+    Do(:,1)=1;
+    v_left=0;
+
 u=Do;
 
 %surf(x,y,u,'EdgeColor','none')
@@ -54,13 +59,16 @@ error=100; % Becasue we have not solved it yet the Error is a baseline of 100%
 % It will solve untill the error Max error is below the specified value. 
 
 while error > max_error
-   
+ 
+    
 u1=u; % the value before they run though the system 
+
+u1(:,1)=u(:,1).*dx;
+
+
     for i=2:1:n-1
         for j=2:1:m-1
-           u(i,j)=0.25*(u(i+1,j)+u(i-1,j)+u(i,j+1)+u(i,j+1)+F(i,j));
-            % The diagonals on the square around the point 
-            u(i,j)=0.25*(u(i+1,j+1)+u(i+1,j-1)+u(i-1,j+1)+u(i-1,j+1))+F(i,j);     
+          u(i,j)=0.25*(u(i+1,j)+u(i-1,j)+u(i,j+1)+u(i,j+1)+F(i,j));
         end
     end
 u2=u;   % the values after they are calclated. 
