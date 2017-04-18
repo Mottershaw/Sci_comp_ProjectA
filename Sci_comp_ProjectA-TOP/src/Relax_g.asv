@@ -30,14 +30,16 @@ y=-pi:(dx):pi;
 %%
 
 % TOP 
-    f=x.*(x+pi).^2;
-%Bottom
+    g=(x+pi).^2.*cos(-x);
     
-     g=(x+pi).^2.*cos(-x); 
+   % Do(1,:)=g;   
+%Bottom
+    f=x.*(x+pi).^2;
     %Do(n,:)=f;
 %Right hand vertical
 %     g=Do(n,end);
 %     f=Do(1,end);
+    f(end)
     h=g(end)+((y+pi)/(2*pi))*(f(end)-g(end));
 %left hand verical
    % Neuman boundary Condition
@@ -45,15 +47,13 @@ y=-pi:(dx):pi;
     
 %% Boundaries
 
-Do(1,:)=fliplr(f); % TOP
+Do(1,:)=f; % TOP
 Do(:,n)=g;% BOTTOM
 Do(:,1)=0; % RIGHT
-Do(m,:)=fliplr(h); % LEFT
+Do(m,:)=h; % LEFT
 
     
     u=Do;
-%     figure(7)
-%     surf(u)
 
 %surf(x,y,u,'EdgeColor','none')
 %% the solve
@@ -72,7 +72,7 @@ u2=0;
 % Where we start counting with Lamda
 lamda=lamda_Start;
 % The scaling ammount for how lamda is helped 
-%L_add=1/sqrt(nodes);
+L_add=1/sqrt(nodes);
 count=0;
 error=100; % Becasue we have not solved it yet the Error is a baseline of 100%
 
@@ -82,7 +82,8 @@ while error > max_error
     
     %% Solving for U matrix 
     
-    u(:,1)=u(:,2)*2*dx;   
+    u(:,1)=u(:,2)*2*dx;
+    
     u1=u; % the value before they run though the system 
     
 
