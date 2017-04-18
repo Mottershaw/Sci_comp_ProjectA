@@ -18,30 +18,41 @@ bx=-pi;
 % Y Boundarys 
 ay=pi;
 by=-pi;
-%% The boundry 
-n=nodes;
-m=n;
+%% The domain 
+n=nodes; m=n;
 %Domain 
 Do=ones(n,m)*0.00001;
 
 dx=(2*pi/(m-1));
 x=pi:-(dx):-pi;
 y=pi:-(dx):-pi;
+
+%%
+
 % TOP 
-    g=x.*(x-ax).^2;
-    Do(1,:)=g;   
+    g=(x+pi).^2.*cos(-x);
+    
+   % Do(1,:)=g;   
 %Bottom
-    f=(x-ax).^2.*cos((pi.*x)./ax);
-    Do(n,:)=f;
+    f=x.*(x+pi).^2;
+    %Do(n,:)=f;
 %Right hand vertical
 %     g=Do(n,end);
 %     f=Do(1,end);
-    Do(:,m)=g+(y-ay)/(by-ay).*(f-g);
+    h=g(end)+((y+pi)/(2*pi))*(f(end)-g(end));
 %left hand verical
    % Neuman boundary Condition
-    Do(:,1)=1;
-    v_left=0;
-u=Do;
+    Do(:,1)=0;
+    
+%% Boundaries
+
+Do(1,:)=f % TOP
+Do(:,n)=g % BOTTOM
+Do(:,1)=0 % RIGHT
+Do(m,:)=h % LEFT
+
+    
+    u=Do;
 
 %surf(x,y,u,'EdgeColor','none')
 %% the solve
@@ -70,7 +81,7 @@ while error > max_error
     
     %% Solving for U matrix 
     
-    u(:,1)=u(:,1)*dx;
+    u(:,1)=u(:,2)*dx;
     
     u1=u; % the value before they run though the system 
     

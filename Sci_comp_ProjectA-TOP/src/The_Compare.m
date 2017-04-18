@@ -6,8 +6,8 @@
 clear
 clc
 %% Imput and Bounds
-nodes=500;
-Max_error=0.01;
+nodes=10;
+Max_error=0.1;
 
 x=pi:-(2*pi/(nodes-1)):-pi;
 y=pi:-(2*pi/(nodes-1)):-pi;

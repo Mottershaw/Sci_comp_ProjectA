@@ -10,7 +10,7 @@ bx=-pi;
 ay=pi;
 by=-pi;
 %% The boundry 
-n=200;
+n=300;
 m=n;
 %Domain 
 Do=ones(n,m)*0.00001;
