@@ -78,7 +78,7 @@ while error > max_error
     for i=2:1:n-1
         for j=2:1:m-1
            u(i,j)=0.25*(u(i+1,j)+u(i-1,j)+u(i,j+1)+u(i,j+1)+(F(i,j)*dx^2));
-          % u(i,j)=0.25*(u(i+1,j+1)+u(i+1,j-1)+u(i-1,j+1)+u(i-1,j+1)+(F(i,j)*dx^2));     
+          u(i,j)=0.25*(u(i+1,j+1)+u(i+1,j-1)+u(i-1,j+1)+u(i-1,j+1)+(F(i,j)*dx^2));     
         end
     end
 u2=u;   % the values after they are calclated. 
