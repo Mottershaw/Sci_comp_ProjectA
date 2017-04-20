@@ -32,8 +32,8 @@ T=table(SolveCycles,Real_Error,Lambda_Real,'RowNames',SolvingTypes)
 Gause_diff=max(max(abs(uG-uRG)))
 Relax_diff=max(max(abs(uR-uRR)))
 
-H=[0;0;(countRG/countG)*100;(countRR/countR)*100];
-Faster=table(SolveCycles,H,'RowNames',SolvingTypes)
+H=('Baseline','Baseline',/countG
+Faster=table(SolveCycles,'RowNames',SolvingTypes)
 
 %U_diff=abs(uG-uR);
 
