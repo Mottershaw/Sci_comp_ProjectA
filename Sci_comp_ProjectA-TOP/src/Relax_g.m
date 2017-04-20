@@ -50,12 +50,10 @@ Do(:,n)=g;% BOTTOM
 Do(:,1)=0; % RIGHT
 Do(m,:)=fliplr(h); % LEFT
 
-    
-    u=Do;
+u=Do;
 %     figure(7)
 %     surf(u)
-
-%surf(x,y,u,'EdgeColor','none')
+%     surf(x,y,u,'EdgeColor','none')
 %% the solve
 F=zeros(n);
 %% The function we have to have at every point 
@@ -79,12 +77,10 @@ error=100; % Becasue we have not solved it yet the Error is a baseline of 100%
 % It will solve untill the error Max error is below the specified value. 
 
 while error > max_error
-    
     %% Solving for U matrix 
     
     u(:,1)=u(:,2)*2*dx;   
     u1=u; % the value before they run though the system 
-    
 
     for i=2:1:n-1
         for j=2:1:m-1
@@ -94,18 +90,22 @@ while error > max_error
     end
 u2=u;   % the values after they are calclated. 
 
-error=max(max(abs((u1-u2)./u2)))*100;
+new=mean(mean(u2));
+old=mean(mean(u1));
+
+error=abs((new-old)/new)*100;
 
 u=u2*lamda+(1-lamda)*u1;
 
 count=count+1;
 
-if count== 10000 | lamda == 2
+if count == 10000 
     break
 end
 %% The Results 
     
-error=max(max(abs((u1-u2)./u2)))*100;
+error=max(max(abs((u2-u1)./abs(u1))))*100;
+
 count;
 %count=(lamda-1)*1000;
 % figure(2)

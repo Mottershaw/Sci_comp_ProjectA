@@ -6,7 +6,7 @@
 clear
 clc
 %% Imput and Bounds
-nodes=500;
+nodes=100;
 Max_error=0.0001;
 
 x=pi:-(2*pi/(nodes-1)):-pi;
@@ -16,7 +16,7 @@ Lambda_g_in=1;
 [uG,countG,errorG]=Relax_g(Max_error,nodes,Lambda_g_in);
 
 %% The Relaxation Approximation
-Lambda=1.2;
+Lambda=1.3;
 [uR,countR,errorR,lamdaR]=Relax_g(Max_error,nodes,Lambda);
 
 %% Making the table so we can adjust
@@ -29,7 +29,7 @@ T=table(SolveCycles,Real_Error,Lambda_Real,'RowNames',SolvingTypes)
 
 U_diff=abs(uG-uR);
 
-Precent_Faster=(1-(countR/countG))*100
+Precent_Faster=(1-countR/countG)*100
 
 Max_Diff=max(max(U_diff))
 
