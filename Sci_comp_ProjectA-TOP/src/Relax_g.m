@@ -88,6 +88,9 @@ while error > max_error
          	%u(i,j)=0.25*(u(i+1,j+1)+u(i+1,j-1)+u(i-1,j+1)+u(i-1,j+1)+(F(i,j)*dx^2));     
         end
     end
+    
+    
+    
 u2=u;   % the values after they are calclated. 
 
 new=mean(mean(u2));
