@@ -6,7 +6,7 @@
 clear
 clc
 %% Imput and Bounds
-nodes=150;
+nodes=2500;
 Max_error=0.00001;
 
 x=pi:-(2*pi/(nodes-1)):-pi;
@@ -34,8 +34,8 @@ Precent_Faster=(1-countRR/countRG)*100
 
 Max_Diff=max(max(U_diff))
 
-save('G_grid_1500','uG')
-save('R_grid_1500','uR')
+save('G_grid_2500','uG')
+save('R_grid_2500','uR')
 
 
 
