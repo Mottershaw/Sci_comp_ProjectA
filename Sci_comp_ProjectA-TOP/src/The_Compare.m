@@ -6,7 +6,7 @@
 clear
 clc
 %% Imput and Bounds
-nodes=500;
+nodes=150;
 Max_error=0.00001;
 
 x=pi:-(2*pi/(nodes-1)):-pi;
@@ -14,12 +14,12 @@ y=pi:-(2*pi/(nodes-1)):-pi;
 %% The Gause Approximation
 Lambda_g_in=1;
 
-[uRG,countRG,errorGR]=RG_2(Max_error,nodes,Lambda_g_in);
+[uG,countRG,errorGR]=RG_2(Max_error,nodes,Lambda_g_in);
 
 %% The Relaxation Approximation
 Lambda=1.16;
 
-[uRR,countRR,errorRR]=RG_2(Max_error,nodes,Lambda);
+[uR,countRR,errorRR]=RG_2(Max_error,nodes,Lambda);
 
 %% Making the table so we can adjust
 SolvingTypes={'Gause';'Relaxation'};
@@ -29,18 +29,23 @@ Lambda_Real=[1;Lambda];
 
 T=table(SolveCycles,Real_Error,Lambda_Real,'RowNames',SolvingTypes)
 
-U_diff=abs(uRG-uRR);
+U_diff=abs(uG-uR);
 Precent_Faster=(1-countRR/countRG)*100
 
 Max_Diff=max(max(U_diff))
 
+save('G_grid_1500','uG')
+save('R_grid_1500','uR')
+
+
+
 %% Graphs for the solution 
 figure(1)
-surf(x,y,uRG,'EdgeColor','none')
+surf(x,y,uG,'EdgeColor','none')
 title('Gause')
 
 figure(2)
-surf(x,y,uRR,'EdgeColor','none')
+surf(x,y,uR,'EdgeColor','none')
 title('Relaxed Plot')
 
 figure(3) % The Difference between the solutions

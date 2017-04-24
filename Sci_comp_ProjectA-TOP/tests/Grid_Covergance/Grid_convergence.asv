@@ -1,0 +1,54 @@
+%% Grid convergence
+
+% Created by Grant Mottershaw
+% 4/23/2017
+
+% This will demonstrait that we are converging to the a soltion as our
+% resolution increses 
+
+clear
+clc
+%% Imput and Bounds
+
+load('G_grid_1000');
+
+uG_A=uG;
+figure(3)
+surf(uG_A)
+load('G_grid_2000');
+uG_B=uG;
+
+load('R_grid_1000')
+uR_A=uR;
+load('R_grid_2000');
+uR_B=uR;
+
+
+%% Calulating the convergence
+
+nodes=[length(;
+M=2; N=2;
+
+U_diff_G=zeros(nodes); 
+U_diff_R=zeros(nodes); 
+
+for i=2:1:nodes-1
+     for j=2:1:nodes-1
+         U_diff_G(i,j)=abs(uG_A(i,j)-uG_B(M,N));
+         U_diff_R(i,j)=abs(uR_A(i,j)-uR_B(M,N));
+         M=M+2;
+     end
+     M=1; N=N+2;
+end
+
+AVG_diff_G=mean(mean(abs(U_diff_G)))
+AVG_diff_R=mean(mean(abs(U_diff_G)))
+
+
+% figure(1)
+% surf(U_diff_G,'EdgeColor','none')
+% title('Gause')
+% % 
+% figure(2)
+% surf(U_diff_R,'EdgeColor','none')
+% title('Relaxed')
